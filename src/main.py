@@ -1,9 +1,9 @@
 import os
 from data.config import JSON_FILENAME
-from utils import *
+from src.utils import *
 
 #выбор файла json для загрузки данных
-data_path = os.path.join("..", "data", JSON_FILENAME)
+data_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "..", "data", JSON_FILENAME))
 
 #чтение данных из файла json
 json_data = load_json(data_path)
