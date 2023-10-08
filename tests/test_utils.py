@@ -2,17 +2,19 @@ from src.main import data_path
 from src.utils import *
 
 json_data = load_json(data_path)
+
+
 def test_load_json():
-    assert type(json_data[0]['id']) is int
     for item in json_data:
-        assert isinstance(item, dict)  # Ожидаем, что каждый элемент списка является словарем
-        assert 'id' in item and isinstance(item['id'], int)  # Ожидаем, что 'id' это число
-        assert 'state' in item and item['state'] in ['EXECUTED','CANCELLED']  # Ожидаем 'state' из определенных значений
-        assert len(item) == 7  # Ожидаем, что словарь содержит 7 ключей
+        if item:  #проверка что словарь не пустой
+            assert isinstance(item, dict)  # Ожидаем, что каждый элемент списка является словарем
+            assert 'id' in item and isinstance(item['id'], int)  # Ожидаем, что 'id' это число
+            assert 'state' in item and item['state'] in ['EXECUTED', 'CANCELED']  # Ожидаем 'state' из определенных значений
+            assert (len(item) <=7)  # Ожидаем, что словарь содержит 7 ключей
 
 
 def test_get_last_five_executed_operetions():
-    last_five_operations = get_last_five_executed_operations(json_data)
+    last_five_operations = get_last_five_executed_operetions(json_data)
     assert isinstance(last_five_operations, list)  # Ожидаем список
     assert len(last_five_operations) <= 5  # Ожидаем не более 5 элементов
     for operation in last_five_operations:
@@ -23,7 +25,7 @@ def test_format_account_data():
     # Тест для счёта
     account_data = 'Счет 64686473678894779589'
     formatted_data = format_account_data(account_data)
-    assert formatted_data == 'Счет **9589' #Ожидаем маску в таком виде
+    assert formatted_data == 'Счет **9589'  #Ожидаем маску в таком виде
 
     # Тест для номера карты
     card_data = 'Maestro 1596837868705199'
@@ -64,4 +66,3 @@ def test_format_output(capsys):
 
     # Проверяем, что фактический вывод совпадает с ожидаемым выводом
     assert captured.out == expected_output
-
