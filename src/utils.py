@@ -54,5 +54,5 @@ def format_output(data):
 
     print(f"\n{formatted_date} {data['description']}")
     print(f"{format_account_data(data['from']) if 'from' in data else ''} -> {format_account_data(data['to'])}")
-    print(f"{data['operationAmount']['amount']} {data['operationAmount']['currency']['name']} ")
+    print(f"{data['operationAmount']['amount']} {data['operationAmount']['currency']['name']}")
 
