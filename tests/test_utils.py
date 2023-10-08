@@ -10,7 +10,7 @@ def test_load_json():
             assert isinstance(item, dict)  # Ожидаем, что каждый элемент списка является словарем
             assert 'id' in item and isinstance(item['id'], int)  # Ожидаем, что 'id' это число
             assert 'state' in item and item['state'] in ['EXECUTED', 'CANCELED']  # Ожидаем 'state' из определенных значений
-            assert (len(item) <=7)  # Ожидаем, что словарь содержит 7 ключей
+            assert (6 <= len(item) <= 7)  # Ожидаем, что словарь содержит 6 (для открытия счета) или 7(для перевода) ключей
 
 
 def test_get_last_five_executed_operetions():
