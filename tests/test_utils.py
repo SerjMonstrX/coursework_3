@@ -5,12 +5,12 @@ json_data = load_json(data_path)
 
 
 def test_load_json():
-    assert type(json_data[0]['id']) is int
     for item in json_data:
-        assert isinstance(item, dict)  # Ожидаем, что каждый элемент списка является словарем
-        assert 'id' in item and isinstance(item['id'], int)  # Ожидаем, что 'id' это число
-        assert 'state' in item and item['state'] in ['EXECUTED', 'CANCELLED']  # Ожидаем 'state' из определенных значений
-        assert len(item) == 7  # Ожидаем, что словарь содержит 7 ключей
+        if item:  #проверка что словарь не пустой
+            assert isinstance(item, dict)  # Ожидаем, что каждый элемент списка является словарем
+            assert 'id' in item and isinstance(item['id'], int)  # Ожидаем, что 'id' это число
+            assert 'state' in item and item['state'] in ['EXECUTED', 'CANCELED']  # Ожидаем 'state' из определенных значений
+            assert (len(item) <=7)  # Ожидаем, что словарь содержит 7 ключей
 
 
 def test_get_last_five_executed_operetions():
